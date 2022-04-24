@@ -4,14 +4,14 @@ import { calculateDays } from './utils/daysRemainingCalculator'
 import Segment from './segment'
 import './input.css'
 
+const defaultSegment = {
+  numberOfDaysDrinking: 0,
+  amountDrinkPerDay: 0
+}
+
 const Inputs = () => {
   const [amountAlreadySaved, setAmountAlreadySaved] = useState(0)
-  // const [amountDrinkPerDay, setAmountDrinkPerDay] = useState(0)
-  // const [numberOfDaysDrinking, setNumberOfDaysDrinking] = useState(0)
-  const [segments, setSegments] = useState([{
-    numberOfDaysDrinking: 0.,
-    amountDrinkPerDay: 0
-  }])
+  const [segments, setSegments] = useState([defaultSegment])
   const [amountProducedPerDay, setAmountProducedPerDay] = useState(0)
   const [remainingDays, setRemainingDays] = useState(0)
 
@@ -27,8 +27,12 @@ const Inputs = () => {
 
   const setSegmentForIndex = (index) => {
     return (newSegment) => {
-      setSegments([...segments.slice(0, index), newSegment, ...segments(index + 1)])
+      setSegments([...segments.slice(0, index), newSegment, ...segments.slice(index + 1)])
     }
+  }
+
+  const addNewSegment = () => {
+    setSegments([...segments, defaultSegment])
   }
 
   return (
@@ -58,6 +62,7 @@ const Inputs = () => {
       {segments.map((segment, index) => (
         <Segment index={index} key={index} segment={segment} setSegment={setSegmentForIndex(index)}/>
       ))}
+      <button onClick={addNewSegment}>+</button>
       <button onClick={callDayCalculator}>Calculate!</button>
       <p>Amount of days to pump: {remainingDays}</p>
     </>

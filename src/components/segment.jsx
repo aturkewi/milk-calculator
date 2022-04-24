@@ -3,7 +3,6 @@ const Segment = ({index, segment, setSegment}) => {
 
   const handleChange = (event, key) => {
     const value = event.target.value
-    debugger
     setSegment({...segment, [key]: value})
   }
 
