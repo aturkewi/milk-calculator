@@ -15,21 +15,6 @@ const Inputs = () => {
     setter(value)
   }
 
-  // const calculateDays = () => {
-  //   const savingPerDay = amountProducedPerDay - amountDrinkPerDay
-
-  //   let remainingNeed = amountDrinkPerDay * numberOfDaysDrinking
-  //   let currentSavings = amountAlreadySaved
-  //   let days = 0
-
-  //   while(remainingNeed > currentSavings){
-  //     remainingNeed -= amountDrinkPerDay
-  //     currentSavings += savingPerDay
-  //     days += 1
-  //   }
-
-  //   setRemainingDays(days)
-  // }
   const callDayCalculator = () => {
     const days = calculateDays({amountProducedPerDay, amountDrinkPerDay, numberOfDaysDrinking, amountAlreadySaved})
     setRemainingDays(days)

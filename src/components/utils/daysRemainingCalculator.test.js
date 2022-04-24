@@ -38,4 +38,19 @@ describe('calcualteDays', () => {
 
     expect(days).toBe(5)
   })
+
+  test('returns total num of days if never safe enough', () => {
+    const produceAmt = 10
+    const daysDrinking = 20
+
+    const days = calculateDays({
+      amountProducedPerDay: produceAmt,
+      amountDrinkPerDay: produceAmt,
+      numberOfDaysDrinking: daysDrinking,
+      amountAlreadySaved: 0
+      
+    })
+
+    expect(days).toBe(daysDrinking)
+  })
 })
