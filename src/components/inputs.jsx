@@ -23,42 +23,48 @@ const Inputs = () => {
 
   return (
     <>
-      <div>
-        <label className='inputLabel' htmlFor='amount-already-saved'>Amount Saved</label>
-        <input
-          type="number"
-          name='amount-already-saved'
-          value={amountAlreadySaved}
-          onChange={(e) => handleChange(e, setAmountAlreadySaved)}
-        />
-      </div>
-      <div>
-        <label className='inputLabel' htmlFor='amount-drink-per-day'>Amount drink per day (mL)</label>
-        <input
-          type='number'
-          name='amount-drink-per-day'
-          value={amountDrinkPerDay}
-          onChange={(e) => handleChange(e, setAmountDrinkPerDay)}
-        />
-      </div>
-      <div>
-        <label className='inputLabel' htmlFor='number-of-days-drinking'>Drinking for how many days</label>
-        <input
-          type='number'
-          name='number-of-days-drinking'
-          value={numberOfDaysDrinking}
-          onChange={(e) => handleChange(e, setNumberOfDaysDrinking)}
-        />
-      </div>
-      <div>
-        <label className='inputLabel' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
-        <input
-          type='number'
-          name='amount-produced-per-day'
-          value={amountProducedPerDay}
-          onChange={(e) => handleChange(e, setAmountProducedPerDay)}
-        />
-      </div>
+      <fieldset className='form-group'>
+        <legend>Milk information</legend>
+        <div>
+          <label className='input-label' htmlFor='amount-already-saved'>Amount Saved</label>
+          <input
+            type="number"
+            name='amount-already-saved'
+            value={amountAlreadySaved}
+            onChange={(e) => handleChange(e, setAmountAlreadySaved)}
+          />
+        </div>
+        <div>
+          <label className='input-label' htmlFor='amount-drink-per-day'>Amount drink per day (mL)</label>
+          <input
+            type='number'
+            name='amount-drink-per-day'
+            value={amountDrinkPerDay}
+            onChange={(e) => handleChange(e, setAmountDrinkPerDay)}
+          />
+        </div>
+      </fieldset>
+      <fieldset className='form-group'>
+        <legend>Leg 1</legend>
+        <div>
+          <label className='input-label' htmlFor='number-of-days-drinking'>Drinking for how many days</label>
+          <input
+            type='number'
+            name='number-of-days-drinking'
+            value={numberOfDaysDrinking}
+            onChange={(e) => handleChange(e, setNumberOfDaysDrinking)}
+          />
+        </div>
+        <div>
+          <label className='input-label' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
+          <input
+            type='number'
+            name='amount-produced-per-day'
+            value={amountProducedPerDay}
+            onChange={(e) => handleChange(e, setAmountProducedPerDay)}
+          />
+        </div>
+      </fieldset>
       <button onClick={callDayCalculator}>Calculate!</button>
       <p>Amount of days to pump: {remainingDays}</p>
     </>

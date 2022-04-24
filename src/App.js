@@ -6,7 +6,9 @@ import Inputs from './components/inputs';
 
 function App() {
   return (
-    <Inputs />
+    <div className='App'>
+      <Inputs />
+    </div>
   );
 }
 

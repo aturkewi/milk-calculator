@@ -1,3 +1,11 @@
-.inputLabel {
+.input-label {
   padding-right: 4px;
+}
+
+.form-group {
+  border: 1px solid;
+  border-radius: 2px;
+  /* padding: 10px; */
+  margin-bottom: 10px;
+  /* margin-left: -1px; */
 }
