@@ -31,6 +31,12 @@ const Inputs = () => {
     }
   }
 
+  const removeSegment = (index) => {
+    return () => {
+      setSegments([...segments.slice(0, index), ...segments.slice(index + 1)])
+    }
+  }
+
   const addNewSegment = () => {
     setSegments([...segments, defaultSegment])
   }
@@ -60,7 +66,13 @@ const Inputs = () => {
         
       </fieldset>
       {segments.map((segment, index) => (
-        <Segment index={index} key={index} segment={segment} setSegment={setSegmentForIndex(index)}/>
+        <Segment
+          index={index}
+          key={index}
+          segment={segment}
+          setSegment={setSegmentForIndex(index)}
+          removeSegment={removeSegment(index)}
+        />
       ))}
       <button onClick={addNewSegment}>+</button>
       <button onClick={callDayCalculator}>Calculate!</button>
