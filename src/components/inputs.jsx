@@ -1,12 +1,17 @@
 import { useState } from 'react'
 
 import { calculateDays } from './utils/daysRemainingCalculator'
+import Segment from './segment'
 import './input.css'
+
+const defaultSegment = {
+  numberOfDaysDrinking: 0,
+  amountDrinkPerDay: 0
+}
 
 const Inputs = () => {
   const [amountAlreadySaved, setAmountAlreadySaved] = useState(0)
-  const [amountDrinkPerDay, setAmountDrinkPerDay] = useState(0)
-  const [numberOfDaysDrinking, setNumberOfDaysDrinking] = useState(0)
+  const [segments, setSegments] = useState([defaultSegment])
   const [amountProducedPerDay, setAmountProducedPerDay] = useState(0)
   const [remainingDays, setRemainingDays] = useState(0)
 
@@ -16,10 +21,25 @@ const Inputs = () => {
   }
 
   const callDayCalculator = () => {
-    const days = calculateDays({amountProducedPerDay, amountDrinkPerDay, numberOfDaysDrinking, amountAlreadySaved})
+    const days = calculateDays({amountProducedPerDay, amountAlreadySaved, segments})
     setRemainingDays(days)
   }
 
+  const setSegmentForIndex = (index) => {
+    return (newSegment) => {
+      setSegments([...segments.slice(0, index), newSegment, ...segments.slice(index + 1)])
+    }
+  }
+
+  const removeSegment = (index) => {
+    return () => {
+      setSegments([...segments.slice(0, index), ...segments.slice(index + 1)])
+    }
+  }
+
+  const addNewSegment = () => {
+    setSegments([...segments, defaultSegment])
+  }
 
   return (
     <>
@@ -35,27 +55,6 @@ const Inputs = () => {
           />
         </div>
         <div>
-          <label className='input-label' htmlFor='amount-drink-per-day'>Amount drink per day (mL)</label>
-          <input
-            type='number'
-            name='amount-drink-per-day'
-            value={amountDrinkPerDay}
-            onChange={(e) => handleChange(e, setAmountDrinkPerDay)}
-          />
-        </div>
-      </fieldset>
-      <fieldset className='form-group'>
-        <legend>Leg 1</legend>
-        <div>
-          <label className='input-label' htmlFor='number-of-days-drinking'>Drinking for how many days</label>
-          <input
-            type='number'
-            name='number-of-days-drinking'
-            value={numberOfDaysDrinking}
-            onChange={(e) => handleChange(e, setNumberOfDaysDrinking)}
-          />
-        </div>
-        <div>
           <label className='input-label' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
           <input
             type='number'
@@ -64,7 +63,18 @@ const Inputs = () => {
             onChange={(e) => handleChange(e, setAmountProducedPerDay)}
           />
         </div>
+        
       </fieldset>
+      {segments.map((segment, index) => (
+        <Segment
+          index={index}
+          key={index}
+          segment={segment}
+          setSegment={setSegmentForIndex(index)}
+          removeSegment={removeSegment(index)}
+        />
+      ))}
+      <button onClick={addNewSegment}>+</button>
       <button onClick={callDayCalculator}>Calculate!</button>
       <p>Amount of days to pump: {remainingDays}</p>
     </>
