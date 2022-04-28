@@ -5,7 +5,7 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
 
   const handleChange = (event, key) => {
     const value = event.target.value
-    setSegment({...segment, [key]: value})
+    setSegment({...segment, [key]: parseInt(value)})
   }
 
   return (

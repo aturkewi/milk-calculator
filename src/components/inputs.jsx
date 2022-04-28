@@ -15,15 +15,17 @@ const Inputs = () => {
   const [segments, setSegments] = useState([defaultSegment])
   const [amountProducedPerDay, setAmountProducedPerDay] = useState(0)
   const [remainingDays, setRemainingDays] = useState(0)
+  const [dataPoints, setDataPoints] = useState([])
 
   const handleChange = (e, setter) => {
     const value = e.target.value
-    setter(value)
+    setter(parseInt(value))
   }
 
   const callDayCalculator = () => {
-    const days = calculateDays({amountProducedPerDay, amountAlreadySaved, segments})
-    setRemainingDays(days)
+    const {remainingDays, dataPoints} = calculateDays({amountProducedPerDay, amountAlreadySaved, segments})
+    setRemainingDays(remainingDays)
+    setDataPoints(dataPoints)
   }
 
   const setSegmentForIndex = (index) => {
@@ -81,8 +83,7 @@ const Inputs = () => {
         
       </div>
       <div className='right-panel'>
-        <Results remainingDays={remainingDays}/>
-        
+        <Results remainingDays={remainingDays} dataPoints={dataPoints}/>
       </div>
     </div>
   )
