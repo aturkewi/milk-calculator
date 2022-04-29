@@ -25,7 +25,7 @@ export const calculateDays = ({
       amountSaved = amountSaved + (amountProducedPerDay - amountDrinkPerDay)
       amountNeeded = amountNeeded - amountDrinkPerDay
 
-      segmentData = [...segmentData, {days, amountSaved, amountNeeded}]
+      segmentData = [...segmentData, {day: days, amountSaved, amountNeeded}]
     }
 
     return [...dataPoints, ...segmentData]
