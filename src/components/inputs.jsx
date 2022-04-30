@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { PlusCircle } from 'phosphor-react'
 
 import { calculateDays } from './utils/daysRemainingCalculator'
 import Segment from './segment'
@@ -87,7 +88,12 @@ const Inputs = () => {
             removeSegment={removeSegment(index)}
           />
         ))}
-        <button onClick={addNewSegment}>+</button>
+        <PlusCircle
+          className='clickable-icon'
+          size={32}
+          onClick={addNewSegment}
+        />
+        <br />
         <button onClick={callDayCalculator}>Calculate!</button>
         
       </div>

@@ -1,3 +1,4 @@
+import { MinusCircle } from 'phosphor-react'
 import DatePicker from 'react-date-picker'
 
 import './segment.css'
@@ -39,7 +40,10 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
           </div>
         </div>
         {index > 0 &&
-          <button onClick={removeSegment}>-</button>
+          <MinusCircle
+            className='clickable-icon'
+            onClick={removeSegment}
+          />
         }
       </div>
     </fieldset>
