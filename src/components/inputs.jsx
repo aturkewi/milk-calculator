@@ -6,7 +6,7 @@ import Results from './results'
 import './input.css'
 
 const defaultSegment = {
-  numberOfDaysDrinking: 0,
+  segmentEndDate: new Date(),
   amountDrinkPerDay: 0
 }
 
@@ -23,7 +23,16 @@ const Inputs = () => {
   }
 
   const callDayCalculator = () => {
-    const {remainingDays, dataPoints} = calculateDays({amountProducedPerDay, amountAlreadySaved, segments})
+    let startDate = new Date()
+    startDate.setHours(0, 0, 0, 0)
+    const segmentsWithDays = segments.reduce((total, {segmentEndDate, amountDrinkPerDay}) => {
+      const numberOfDaysDrinking = (segmentEndDate - startDate) / (1000*60*60*24)
+      startDate = segmentEndDate
+      return [...total, {amountDrinkPerDay, numberOfDaysDrinking}]
+    }, [])
+    console.log(segmentsWithDays)
+
+    const {remainingDays, dataPoints} = calculateDays({amountProducedPerDay, amountAlreadySaved, segments: segmentsWithDays})
     setRemainingDays(remainingDays)
     setDataPoints(dataPoints)
   }
@@ -49,7 +58,7 @@ const Inputs = () => {
       <div className='left-panel'>
         <fieldset className='form-group'>
           <legend>Milk information</legend>
-          <div>
+          <div className='input-container'>
             <label className='input-label' htmlFor='amount-already-saved'>Amount Saved</label>
             <input
               type="number"
@@ -58,7 +67,7 @@ const Inputs = () => {
               onChange={(e) => handleChange(e, setAmountAlreadySaved)}
             />
           </div>
-          <div>
+          <div className='input-container'>
             <label className='input-label' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
             <input
               type='number'
