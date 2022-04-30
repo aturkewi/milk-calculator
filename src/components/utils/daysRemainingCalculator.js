@@ -3,27 +3,32 @@ export const calculateDays = ({
   amountProducedPerDay,
   segments
 }) => {
-  let currentSavings = amountAlreadySaved
+  let amountSaved = amountAlreadySaved
   let days = 0
-  console.log('segments', segments)
-  let remainingNeed = segments.reduce((total, {amountDrinkPerDay, numberOfDaysDrinking}) => {
-    console.log('amountDrinkPerDay', amountDrinkPerDay)
-    console.log('numberOfDaysDrinking', numberOfDaysDrinking)
+  let remainingDays = null
+
+  let startingNeed = segments.reduce((total, {amountDrinkPerDay, numberOfDaysDrinking}) => {
     return total + (amountDrinkPerDay * numberOfDaysDrinking)
   }, 0)
-  console.log('remainingNeeded', remainingNeed)
+  let amountNeeded = startingNeed
 
-  segments.forEach(({amountDrinkPerDay, numberOfDaysDrinking}) => {
-    const savingPerDay = amountProducedPerDay - amountDrinkPerDay
+  const dataPoints = segments.reduce((dataPoints, {amountDrinkPerDay, numberOfDaysDrinking}) => {
+    const lastDay = days + numberOfDaysDrinking
+    let segmentData = []
+    for(let i=days; i < lastDay; i++){
+      if(remainingDays === null && amountSaved >= amountNeeded){
+        remainingDays = days
+      }
 
-    let i = 0
-    while (remainingNeed > currentSavings && i < numberOfDaysDrinking) {
-      remainingNeed -= amountDrinkPerDay
-      currentSavings += savingPerDay
-      days += 1
-      i += 1
-    }  
-  })
+      days ++
+      amountSaved = amountSaved + (amountProducedPerDay - amountDrinkPerDay)
+      amountNeeded = amountNeeded - amountDrinkPerDay
 
-  return days
+      segmentData = [...segmentData, {day: days, amountSaved, amountNeeded}]
+    }
+
+    return [...dataPoints, ...segmentData]
+  }, [{day: 0, amountSaved, amountNeeded}])
+
+  return {remainingDays, dataPoints}
 }
