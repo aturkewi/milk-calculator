@@ -12,7 +12,6 @@ export const calculateDays = ({
   }, 0)
   let amountNeeded = startingNeed
 
-  console.log('SEGMENTS', segments)
   const dataPoints = segments.reduce((dataPoints, {amountDrinkPerDay, numberOfDaysDrinking}) => {
     const lastDay = days + numberOfDaysDrinking
     let segmentData = []
@@ -31,6 +30,5 @@ export const calculateDays = ({
     return [...dataPoints, ...segmentData]
   }, [{day: 0, amountSaved, amountNeeded}])
 
-  console.log(dataPoints)
   return {remainingDays, dataPoints}
 }
