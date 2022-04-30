@@ -16,6 +16,11 @@
   padding-right: 4px;
 }
 
+.input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .form-group {
   border: 1px solid;
   border-radius: 2px;

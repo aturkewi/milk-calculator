@@ -1,11 +1,18 @@
+import DatePicker from 'react-date-picker'
+
 import './segment.css'
 
 const Segment = ({index, segment, setSegment, removeSegment}) => {
-  const {numberOfDaysDrinking, amountDrinkPerDay} = segment
+  const {segmentEndDate, amountDrinkPerDay} = segment
 
   const handleChange = (event, key) => {
     const value = event.target.value
-    setSegment({...segment, [key]: parseInt(value)})
+    setSegment({...segment, amountDrinkPerDay: parseInt(value)})
+  }
+
+  const handleDateChange = (date) => {
+    console.log('date', date)
+    setSegment({...segment, segmentEndDate: date})
   }
 
   return (
@@ -14,12 +21,11 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
       <div className='segment'>
         <div> 
           <div className='input-container'>
-            <label className='input-label' htmlFor='number-of-days-drinking'>Drinking for how many days</label>
-            <input
-              type='number'
-              name='number-of-days-drinking'
-              value={numberOfDaysDrinking}
-              onChange={(e) => handleChange(e, 'numberOfDaysDrinking')}
+            <label className='input-label' htmlFor='segment-end-date'>Segment End Date</label>
+            <DatePicker
+              onChange={handleDateChange}
+              value={segmentEndDate}
+              name='segment-end-date'
             />
           </div>
           <div className='input-container'>
@@ -33,7 +39,7 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
           </div>
         </div>
         {index > 0 &&
-          <button onClick={removeSegment}>−</button>
+          <button onClick={removeSegment}>-</button>
         }
       </div>
     </fieldset>
