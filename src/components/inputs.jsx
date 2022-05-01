@@ -55,50 +55,57 @@ const Inputs = () => {
   }
 
   return (
-    <div className='main-wrapper'>
-      <div className='left-panel'>
-        <fieldset className='form-group'>
-          <legend>Milk information</legend>
-          <div className='input-container'>
-            <label className='input-label' htmlFor='amount-already-saved'>Amount Saved</label>
-            <input
-              type="number"
-              name='amount-already-saved'
-              value={amountAlreadySaved}
-              onChange={(e) => handleChange(e, setAmountAlreadySaved)}
+    <div className='wrapper'>
+      <div className='title'>Milk Calculator</div>
+      <div className='main'>
+
+        <div className='left-panel'>
+          <fieldset className='form-group'>
+            <legend>Milk information</legend>
+            <div className='input-container'>
+              <label className='input-label' htmlFor='amount-already-saved'>Amount Saved</label>
+              <input
+                type="number"
+                name='amount-already-saved'
+                value={amountAlreadySaved}
+                onChange={(e) => handleChange(e, setAmountAlreadySaved)}
+              />
+            </div>
+            <div className='input-container'>
+              <label className='input-label' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
+              <input
+                type='number'
+                name='amount-produced-per-day'
+                value={amountProducedPerDay}
+                onChange={(e) => handleChange(e, setAmountProducedPerDay)}
+              />
+            </div>
+            
+          </fieldset>
+          {segments.map((segment, index) => (
+            <Segment
+              index={index}
+              key={index}
+              segment={segment}
+              setSegment={setSegmentForIndex(index)}
+              removeSegment={removeSegment(index)}
             />
-          </div>
-          <div className='input-container'>
-            <label className='input-label' htmlFor='amount-produced-per-day'>Amount Produced Per Day</label>
-            <input
-              type='number'
-              name='amount-produced-per-day'
-              value={amountProducedPerDay}
-              onChange={(e) => handleChange(e, setAmountProducedPerDay)}
-            />
-          </div>
-          
-        </fieldset>
-        {segments.map((segment, index) => (
-          <Segment
-            index={index}
-            key={index}
-            segment={segment}
-            setSegment={setSegmentForIndex(index)}
-            removeSegment={removeSegment(index)}
+          ))}
+          <PlusCircle
+            className='clickable-icon'
+            size={32}
+            onClick={addNewSegment}
           />
-        ))}
-        <PlusCircle
-          className='clickable-icon'
-          size={32}
-          onClick={addNewSegment}
-        />
-        <br />
-        <button onClick={callDayCalculator}>Calculate!</button>
-        
-      </div>
-      <div className='right-panel'>
-        <Results remainingDays={remainingDays} dataPoints={dataPoints}/>
+          <br />
+          <button
+            className='gradient-button gradient-button-1'
+            onClick={callDayCalculator}
+          >Calculate!</button>
+          
+        </div>
+        <div className='right-panel'>
+          <Results remainingDays={remainingDays} dataPoints={dataPoints}/>
+        </div>
       </div>
     </div>
   )

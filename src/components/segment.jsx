@@ -24,6 +24,7 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
           <div className='input-container'>
             <label className='input-label' htmlFor='segment-end-date'>Segment End Date</label>
             <DatePicker
+              className='date-picker'
               onChange={handleDateChange}
               value={segmentEndDate}
               name='segment-end-date'
