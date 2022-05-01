@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/milk-calculator/static/css/main.69ceded0.css",
+    "main.js": "/milk-calculator/static/js/main.24e1a21f.js",
+    "static/js/787.5794e58e.chunk.js": "/milk-calculator/static/js/787.5794e58e.chunk.js",
+    "index.html": "/milk-calculator/index.html",
+    "main.69ceded0.css.map": "/milk-calculator/static/css/main.69ceded0.css.map",
+    "main.24e1a21f.js.map": "/milk-calculator/static/js/main.24e1a21f.js.map",
+    "787.5794e58e.chunk.js.map": "/milk-calculator/static/js/787.5794e58e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69ceded0.css",
+    "static/js/main.24e1a21f.js"
+  ]
+}
