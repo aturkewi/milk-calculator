@@ -1,3 +1,4 @@
+import { MinusCircle } from 'phosphor-react'
 import DatePicker from 'react-date-picker'
 
 import './segment.css'
@@ -23,6 +24,7 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
           <div className='input-container'>
             <label className='input-label' htmlFor='segment-end-date'>Segment End Date</label>
             <DatePicker
+              className='date-picker'
               onChange={handleDateChange}
               value={segmentEndDate}
               name='segment-end-date'
@@ -39,7 +41,10 @@ const Segment = ({index, segment, setSegment, removeSegment}) => {
           </div>
         </div>
         {index > 0 &&
-          <button onClick={removeSegment}>-</button>
+          <MinusCircle
+            className='clickable-icon'
+            onClick={removeSegment}
+          />
         }
       </div>
     </fieldset>

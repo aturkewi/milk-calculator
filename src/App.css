@@ -1,17 +1,5 @@
 .App {
-  /* text-align: center; */
   padding: 20px;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -36,4 +24,12 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+:root {
+  --pink: #ff99c8;
+  --yellow: #fcf6bd;
+  --green: #d0f4de;
+  --blue: #a9def9;
+  --purple: #e4c1f9;
 }
